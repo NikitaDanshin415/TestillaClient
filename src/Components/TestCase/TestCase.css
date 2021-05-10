@@ -1,0 +1,27 @@
+.testCase{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    background: #f8f9fa;
+    border-radius: 2%;
+    padding: 25px;
+}
+
+.testCase_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 15px;
+}
+
+.testCase_description{
+    padding-bottom: 15px;
+}
+
+.testCase_title{
+    font-size: 25px;
+}
+
+.testCase_date{
+    font-size: 25px;
+}

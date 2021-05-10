@@ -1,0 +1,9 @@
+.testStep_elements{
+    display: flex;
+    justify-content: space-around;
+}
+
+.testStep{
+    padding: 14px 0 15px;
+    border-bottom: 1px solid gray;
+}
