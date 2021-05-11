@@ -1,51 +1,50 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Redirect, Link} from "react-router-dom";
 import Auth from "../Auth";
 import Home from "../Home";
 import ApiService from "../../Services";
 import Header from "../Header";
+import TestCase from "../TestCase";
+import TestStep from "../TestSteps/TestStep";
+import HomeView from "../Home/homeView";
 
 
 export default class App extends React.Component{
 
     state = {
-        isLogin : false
+        isLogin : false,
+        user: null,
     }
 
-    login = () =>{
+    login = (user) =>{
         this.setState({
-            isLogin:true
+            isLogin:true,
+            user: user,
         })
     }
 
     logout = () =>{
         localStorage.removeItem('token')
         this.setState({
-            isLogin:false
+            isLogin:false,
+            user: null,
         })
     }
 
     render() {
 
+        if(localStorage.getItem('token') === null){
+            return <Auth login={this.login}/>
+        }
 
         return(
-
-            <Router>
-                <Route path="/" render={
-                    () => {
-                        if(localStorage.getItem('token')){
-                            return (<div>
-                                <Home logout={this.logout}/>
-                            </div>)
-
-                        }
-                        return <Auth login={this.login} exact/>
-                    }
-                } exact/>
-
-
-            </Router>
-
-        )
+            <div>
+               <Header user = {this.state.user} logout={this.logout}/>
+                <Router>
+                    <Route path='/' component={HomeView} exact/>
+                    <Route path='/df' component={TestStep}/>
+                </Router>
+            </div>
+           )
     }
 }

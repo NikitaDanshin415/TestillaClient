@@ -6,10 +6,10 @@ export default class HomeView extends React.Component{
 
     render() {
         return(
-            <section className='Home'>
+            <div className='home'>
                 <TestCase/>
                 <TestCase/>
-            </section>
+            </div>
 
 
         )

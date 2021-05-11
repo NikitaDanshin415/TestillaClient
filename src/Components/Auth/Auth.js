@@ -22,7 +22,9 @@ export default class Auth extends React.Component{
 
             if('access_token' in res){
                localStorage.setItem('token', res.access_token)
-               this.login();
+               this.service.getUserInfo().then((res) => {
+                   this.login(res);
+               })
            }
 
         })

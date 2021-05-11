@@ -18,6 +18,7 @@ export default class Header extends React.Component{
                             <li>{this.props.user.Name}</li>
                             <li>{this.props.user.Email}</li>
                             <li>{this.props.user.Role.Name}</li>
+
                         </ul>
                         <button className='btn btn-primary exit-btn' onClick={this.props.logout}>Exit</button>
                     </div>
@@ -38,8 +39,6 @@ export default class Header extends React.Component{
                         </div>
                     </div>
                 </nav>
-
-
             </header>
         )
     }
