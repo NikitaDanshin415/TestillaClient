@@ -11,5 +11,25 @@ export default class Home extends React.Component{
     }
 
 
+    render() {
+
+        const {user} = this.state;
+        if(user === null){
+            return <div/>
+        }
+        return (
+            <div>
+                <Header
+                    logout = {this.props.logout}
+                    user = {this.state.user}
+                />
+                <HomeView
+                    user = {this.state.user}
+                />
+            </div>
+        )
+    }
+
+
 }
 

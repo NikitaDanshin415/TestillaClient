@@ -7,6 +7,8 @@ import Header from "../Header";
 import TestCase from "../TestCase";
 import TestStep from "../TestSteps/TestStep";
 import HomeView from "../Home/homeView";
+import TestCaseAddForm from "../TestCaseAddForm/TestCaseAddForm";
+import TestPlan from "../TestPlan";
 
 
 export default class App extends React.Component{
@@ -39,10 +41,12 @@ export default class App extends React.Component{
 
         return(
             <div>
-               <Header user = {this.state.user} logout={this.logout}/>
+
                 <Router>
+                    <Header path='/' user = {this.state.user} logout={this.logout}/>
                     <Route path='/' component={HomeView} exact/>
-                    <Route path='/df' component={TestStep}/>
+                    <Route path='/addTestCase' component={TestCaseAddForm}/>
+                    <Route path='/testplan' component={TestPlan}/>
                 </Router>
             </div>
            )
