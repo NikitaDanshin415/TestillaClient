@@ -22,8 +22,10 @@
 
 .testCase_title{
     font-size: 25px;
+    width: 50%;
 }
 
 .testCase_date{
     font-size: 25px;
+    width: 20%;
 }

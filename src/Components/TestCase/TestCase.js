@@ -1,29 +1,45 @@
 import React from 'react';
 import TestStep from "../TestSteps/TestStep";
 import './TestCase.css'
+import {Link, NavLink} from "react-router-dom";
+import parseData from "../Helpers/Helper";
 
 export default class TestCase extends React.Component{
+
+    item = this.props.item;
+
+
+
     render() {
+        let date = parseData(this.item.createDate)
+
+
+        let testCasesRes = [];
+        this.item.steps.forEach((item) => {
+            testCasesRes.push(<TestStep item={item} key={testCasesRes.length} number={testCasesRes.length}/>)
+        })
+
         return(
             <div className='testCase'>
                 <div className='testCase_header'>
-                    <span className='testCase_title'>TestCase</span>
-                    <span className='testCase_date'>10.05.2021</span>
+                    <span className='testCase_title'>{this.item.name}</span>
+                    <span className='testCase_date'>{date}</span>
+                    <NavLink to={'/testcase/'+this.item.id} className={'btn btn-success'}>Run</NavLink>
                 </div>
 
                 <div className='testCase_description'>
-                    Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является
-                    стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник
-                    создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem
-                    Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн.
-                    Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в
-                    более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
+                    {this.item.description}
                 </div>
 
-                <div className='testCase_steps'>
-                    <TestStep/>
-                    <TestStep/>
+                <button className="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target={"#collapseExample"+ this.item.id} aria-expanded="false" aria-controls={"collapseExample"+ this.item.id}>
+                    ▼
+                </button>
+
+                <div className='testCase_steps collapse' id={"collapseExample"+ this.item.id}>
+                    {testCasesRes}
                 </div>
+
             </div>
         )
     }

@@ -10,11 +10,13 @@ export default class TestCaseAddForm extends React.Component{
     state = {
         testCaseName:'',
         testCaseDescription:'',
-        0:{
-            action:'',
-            reaction: ''
-        },
         testStepCounter:1,
+        testSteps:{
+            0:{
+                action:'',
+                reaction: '',
+            },
+        }
     }
 
     service = new ApiService();
@@ -22,24 +24,29 @@ export default class TestCaseAddForm extends React.Component{
     addTestStep = (e) =>{
         e.preventDefault();
 
+        let steps = this.state.testSteps;
+
+        steps[this.state.testStepCounter] = {
+            action: '',
+            reaction: '',
+        }
+
         this.setState({
             testStepCounter: this.state.testStepCounter + 1,
-            [this.state.testStepCounter]:{
-                action:'',
-                reaction: ''
-            }
+            testSteps: steps,
         });
     }
 
     fillTestStep = async (id, action, reaction) =>{
-        await this.setState({
-                [id]:{
-                    action,
-                    reaction
-                }
+        this.setState(state => {
+            state.testSteps[id] = {
+                action,
+                reaction
             }
-        )
-    }
+            return state
+        })
+      }
+
 
     printState = (e) =>{
         e.preventDefault();
@@ -61,8 +68,8 @@ export default class TestCaseAddForm extends React.Component{
     addTestCase = async (e) =>{
         e.preventDefault();
         let id = await this.service.addTestCase(this.state);
+        await this.service.createTestSteps(id.id, this.state.testSteps);
 
-        await this.service.createTestSteps(id, this.state);
         this.props.history.push('/');
     }
 

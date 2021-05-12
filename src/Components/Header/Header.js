@@ -16,18 +16,18 @@ export default class Header extends React.Component{
     }
 
     service = new ApiService();
-
     async componentDidMount() {
 
+        this.service.getUserInfo().then((res) => {
+            this.setState({
+                user: res
+            })
+        })
     }
 
     render() {
 
-        // this.service.getUserInfo().then((res) => {
-        //     this.setState({
-        //         user: res
-        //     })
-        // })
+
         let {user} = this.state
 
         return(

@@ -43,7 +43,7 @@ export default class ApiService{
     createTestSteps = async (id, data) =>{
 
         let testStepsData = [];
-        for(let i = 0; i < data.testStepCounter; i++){
+        for(let i = 0; i < Object.entries(data).length; i++){
             testStepsData.push({
                 "Action": data[i].action,
                 "Reaction": data[i].reaction,
@@ -51,7 +51,6 @@ export default class ApiService{
             })
         }
 
-        console.log('createTestSteps')
         await fetch(`${this.baseUrl}/teststep/array`, {
             method: 'POST',
             cache: 'no-cache',
@@ -92,6 +91,38 @@ export default class ApiService{
             resp => resp.json()
         )
         return res;
-
     }
+
+    getTestCases = async () =>{
+        const res = await fetch(`${this.baseUrl}/testcase`, {
+            method: 'GET',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection':'keep-alive',
+                'Authorization': 'Bearer '+ localStorage.getItem('token'),
+            },
+        });
+        return await res.json();
+    }
+
+    getTestCase = async (id) =>{
+        const res = await fetch(`${this.baseUrl}/testcase/${id}`, {
+            method: 'GET',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection':'keep-alive',
+                'Authorization': 'Bearer '+ localStorage.getItem('token'),
+            },
+        });
+        return await res.json();
+    }
+
 }
