@@ -1,11 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Redirect, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import Auth from "../Auth";
-import Home from "../Home";
-import ApiService from "../../Services";
 import Header from "../Header";
-import TestCase from "../TestCase";
-import TestStep from "../TestSteps/TestStep";
 import HomeView from "../Home/homeView";
 import TestCaseAddForm from "../TestCaseAddForm/TestCaseAddForm";
 import TestPlan from "../TestPlan";

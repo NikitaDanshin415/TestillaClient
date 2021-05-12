@@ -1,0 +1,12 @@
+.addTestStep{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.addTestStep > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+}

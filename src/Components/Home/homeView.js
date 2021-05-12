@@ -7,6 +7,7 @@ export default class HomeView extends React.Component{
     render() {
         return(
             <div className='home'>
+                <Link to='/addTestCase'>Добавить</Link>
                 <TestCase/>
                 <TestCase/>
             </div>

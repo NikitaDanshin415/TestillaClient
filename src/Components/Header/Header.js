@@ -1,13 +1,34 @@
 import React from 'react';
 import './Header.css'
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import ApiService from "../../Services";
 
 export default class Header extends React.Component{
 
+    state ={
+        user: {
+            Name: "",
+            Email: "",
+            Role:{
+                Name:""
+            }
+        }
+    }
 
+    service = new ApiService();
+
+    async componentDidMount() {
+
+    }
 
     render() {
 
+        // this.service.getUserInfo().then((res) => {
+        //     this.setState({
+        //         user: res
+        //     })
+        // })
+        let {user} = this.state
 
         return(
             <header>
@@ -18,10 +39,9 @@ export default class Header extends React.Component{
                     </div>
                     <div className='userInfo'>
                         <ul>
-                            {/*<li>{this.props.user.Name}</li>*/}
-                            {/*<li>{this.props.user.Email}</li>*/}
-                            {/*<li>{this.props.user.Role.Name}</li>*/}
-
+                            <li>{user.Name}</li>
+                            <li>{user.Email}</li>
+                            <li>{user.Role.Name}</li>
                         </ul>
                         <button className='btn btn-primary exit-btn' onClick={this.props.logout}>Exit</button>
                     </div>
@@ -32,12 +52,11 @@ export default class Header extends React.Component{
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav">
                                 <li className="nav-item nav-link">
-                                    <Link to='/'>Сценарии тестирования</Link>
+                                    <NavLink to='/' className="btn" activeClassName='btn btn-primary' exact>Сценарии тестирования</NavLink>
                                 </li>
                                 <li className="nav-item nav-link">
-                                    <Link to='/testplan'>Планы тестирования</Link>
+                                    <NavLink to='/testplan' className="btn" activeClassName='btn btn-primary' >Планы тестирования</NavLink>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
